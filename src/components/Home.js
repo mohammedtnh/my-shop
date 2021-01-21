@@ -1,11 +1,12 @@
 import main from "../homepagephoto.jpeg";
+import { Title, Description, ShopImage } from "../styles";
 
 const Home = () => {
   return (
     <div>
-      <h1 className="App">Smart Hub</h1>
-      <p className="App"> Make your home smarter</p>
-      <img src={main} alt="main" className="photo" />
+      <Title>Smart Hub</Title>
+      <Description> Make your home smarter</Description>
+      <ShopImage src={main} alt="main" />
       <br />
     </div>
   );

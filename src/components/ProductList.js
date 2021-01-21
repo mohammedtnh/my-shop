@@ -1,4 +1,4 @@
-import "../App.css";
+import { ListWrapper, Title } from "../styles";
 import ProductItem from "./ProductItem";
 import products from "../products";
 
@@ -8,8 +8,8 @@ const ProductList = () => {
   ));
   return (
     <div>
-      <h2 className="App">Products</h2>
-      {productList}
+      <Title>Products</Title>
+      <ListWrapper>{productList}</ListWrapper>
     </div>
   );
 };
