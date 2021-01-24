@@ -1,4 +1,4 @@
-import main from "../homepagephoto.jpeg";
+import main from "../homepagephoto.png";
 import { Title, Description, ShopImage } from "../styles";
 
 const Home = () => {

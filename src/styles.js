@@ -35,7 +35,8 @@ export const ShopImage = styled.img`
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 100%;
+  width: 25%;
+  hight: 25%;
 `;
 
 export const ListWrapper = styled.div`
