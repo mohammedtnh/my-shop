@@ -18,23 +18,22 @@ const theme = {
 };
 
 function App() {
-  const [currentTheme, setTheme] = useState(theme.light);
-  const [mode, setMode] = useState("Light Mode");
+  const [currentTheme, setTheme] = useState("light");
 
   const toggleCurrentTheme = () => {
-    if (currentTheme === theme.light) {
-      setMode("Light Mode");
-      setTheme(theme.dark);
+    if (currentTheme === "light") {
+      setTheme("dark");
     } else {
-      setMode("Dark Mode");
-      setTheme(theme.ight);
+      setTheme("light");
     }
   };
 
   return (
-    <ThemeProvider theme={currentTheme}>
+    <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
-      <ThemeButton onClick={toggleCurrentTheme}>{mode}</ThemeButton>
+      <ThemeButton onClick={toggleCurrentTheme}>
+        {currentTheme.toUpperCase()} Theme
+      </ThemeButton>
       <Home />
       <ProductList />
     </ThemeProvider>
