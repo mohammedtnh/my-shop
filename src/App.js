@@ -8,20 +8,30 @@ import products from "./products";
 
 const theme = {
   light: {
-    mainColor: "#B9B9B9", // main font color
-    backgroundColor: "#000000", // main background color
+    mainColor: "#B9B9B9",
+    backgroundColor: "#000000",
     secondaryColor: "#00AAA9",
+    red: "#FF0000",
   },
   dark: {
-    mainColor: "#000000", // main font color
-    backgroundColor: "#B9B9B9", // main background color
+    mainColor: "#000000",
+    backgroundColor: "#B9B9B9",
     secondaryColor: "#00AAA9",
+    red: "#FF0000",
   },
 };
 
 function App() {
   const [currentTheme, setTheme] = useState("light");
+  const [_products, setProducts] = useState(products);
   const [product, setProduct] = useState(null);
+
+  const deleteProduct = (productId) => {
+    const updatedProducts = _products.filter(
+      (product) => product.id !== productId
+    );
+    setProducts(updatedProducts);
+  };
 
   const toggleCurrentTheme = () => {
     if (currentTheme === "light") {
@@ -31,10 +41,19 @@ function App() {
     }
   };
   const display = product ? (
-    <ProductDetail product={product} setProduct={setProduct} />
+    <ProductDetail
+      product={product}
+      setProduct={setProduct}
+      deleteProduct={deleteProduct}
+    />
   ) : (
-    <ProductList setProduct={setProduct} />
+    <ProductList
+      products={_products}
+      deleteProduct={deleteProduct}
+      setProduct={setProduct}
+    />
   );
+
   return (
     <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />

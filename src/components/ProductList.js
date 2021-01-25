@@ -1,19 +1,19 @@
 import { ListWrapper, Title } from "../styles";
 import ProductItem from "./ProductItem";
 import SearchBar from "./SearchBar";
-import products from "../products";
 import { useState } from "react";
 
 const ProductList = (props) => {
   const [query, setQuery] = useState("");
 
-  const productList = products
+  const productList = props.products
     .filter((product) => product.name.toLowerCase().includes(query))
     .map((product) => (
       <ProductItem
         key={product.id}
         product={product}
         setProduct={props.setProduct}
+        deleteProduct={props.deleteProduct}
       />
     ));
 
