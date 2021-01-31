@@ -2,6 +2,7 @@ const products = [
   {
     id: 1,
     name: "Echo Dot",
+    slug: "echo-dot",
     price: 20,
     image:
       "https://images-na.ssl-images-amazon.com/images/I/612KpcXcFBL._AC_SL1000_.jpg",
@@ -11,6 +12,7 @@ const products = [
   {
     id: 2,
     name: "Philips LED Smart Bulb",
+    slug: "philips-led-smart-bulb",
     price: 6,
     image:
       "https://images-na.ssl-images-amazon.com/images/I/81Wp5ldN2TL._AC_SL1500_.jpg",
@@ -20,6 +22,7 @@ const products = [
   {
     id: 3,
     name: "ConnectSense CS-SO-2 Smart Outlet² Plug",
+    slug: "connectsense-smart-outlet-plug",
     price: 23,
     image:
       "https://images-na.ssl-images-amazon.com/images/I/616bS6R1tjL._AC_SL1500_.jpg",

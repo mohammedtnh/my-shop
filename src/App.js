@@ -1,10 +1,12 @@
 import { ThemeProvider } from "styled-components";
-import { GlobalStyle, ThemeButton } from "./styles";
+import { GlobalStyle } from "./styles";
 import Home from "./components/Home";
 import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetails";
 import { useState } from "react";
 import products from "./products";
+import NavBar from "./components/NavBar";
+import { Route, Switch } from "react-router";
 
 const theme = {
   light: {
@@ -24,7 +26,6 @@ const theme = {
 function App() {
   const [currentTheme, setTheme] = useState("light");
   const [_products, setProducts] = useState(products);
-  const [product, setProduct] = useState(null);
 
   const deleteProduct = (productId) => {
     const updatedProducts = _products.filter(
@@ -40,28 +41,25 @@ function App() {
       setTheme("light");
     }
   };
-  const display = product ? (
-    <ProductDetail
-      product={product}
-      setProduct={setProduct}
-      deleteProduct={deleteProduct}
-    />
-  ) : (
-    <ProductList
-      products={_products}
-      deleteProduct={deleteProduct}
-      setProduct={setProduct}
-    />
-  );
 
   return (
     <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
-      <ThemeButton onClick={toggleCurrentTheme}>
-        {currentTheme.toUpperCase()} Theme
-      </ThemeButton>
-      <Home />
-      {display}
+      <NavBar
+        currentTheme={currentTheme}
+        toggleCurrentTheme={toggleCurrentTheme}
+      />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/products/:productSlug">
+          <ProductDetail products={products} deleteProduct={deleteProduct} />
+        </Route>
+        <Route path="/products">
+          <ProductList products={_products} deleteProduct={deleteProduct} />
+        </Route>
+      </Switch>
     </ThemeProvider>
   );
 }

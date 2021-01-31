@@ -2,7 +2,7 @@ import { DeleteButtonStyled } from "../../styles";
 
 const DeleteButton = (props) => {
   const handleDelete = () => {
-    props.deleteProduct(props.product.id);
+    props.deleteProduct(props.productId);
     props.setProduct(null);
   };
 

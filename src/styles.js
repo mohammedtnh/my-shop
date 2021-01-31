@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
+import { Link, NavLink } from "react-router-dom";
 
 export const GlobalStyle = createGlobalStyle`
 body {
@@ -85,4 +86,19 @@ export const DetailWrapper = styled.div`
 
 export const DeleteButtonStyled = styled.p`
   color: ${(props) => props.theme.red};
+`;
+
+export const StyledLink = styled(Link)`
+  img {
+    width: 50%;
+    hight: 50%;
+  }
+`;
+
+export const NavProduct = styled(NavLink)`
+  padding: 0.25em 1em;
+  color: ${(props) => props.theme.mainColor};
+  &.active {
+    color: ${(props) => props.theme.red};
+  }
 `;
