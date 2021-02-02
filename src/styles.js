@@ -89,6 +89,10 @@ export const DeleteButtonStyled = styled.p`
   color: ${(props) => props.theme.red};
 `;
 
+export const UpdateButtonStyled = styled.p`
+  color: orange;
+`;
+
 export const AddButtonStyled = styled(BsPlusCircle)`
   height: 2rem;
   width: 2rem;
