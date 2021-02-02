@@ -99,6 +99,7 @@ export const AddButtonStyled = styled(BsPlusCircle)`
 export const CreateButtonStyled = styled.button`
   color: ${(props) => props.theme.backgroundColor};
   background-color: ${(props) => props.theme.mainColor};
+  float: right;
 
   &:hover {
     color: ${(props) => props.theme.mainColor};

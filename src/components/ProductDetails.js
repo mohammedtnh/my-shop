@@ -3,11 +3,14 @@ import { DetailWrapper } from "../styles";
 import DeleteButton from "./buttons/DeleteButton";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import UpdateButton from "./buttons/UpdateButton";
 
 const ProductDetail = () => {
-  const { productSlug } = useParams();
-  const products = useSelector((state) => state.products);
-  const product = products.find((product) => product.slug === productSlug);
+  const productSlug = useParams().productSlug;
+  const product = useSelector((state) =>
+    state.products.find((product) => product.slug === productSlug)
+  );
+
   if (!product) return <Redirect to="/products" />;
   return (
     <DetailWrapper>
@@ -18,6 +21,7 @@ const ProductDetail = () => {
 
       {/* <p onClick={() => props.setProduct(null)}>Go Back Home</p> */}
       <DeleteButton productId={product.id} />
+      <UpdateButton slug={product.slug} />
     </DetailWrapper>
   );
 };

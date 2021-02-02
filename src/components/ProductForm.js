@@ -1,20 +1,26 @@
 import { useState } from "react";
 import { CreateButtonStyled } from "../styles";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 
 // Redux Actions
-import { createProduct } from "../store/actions";
+import { createProduct, updateProduct } from "../store/actions";
 
 const ProductForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [product, setProduct] = useState({
-    name: "",
-    price: 0,
-    description: "",
-    image: "",
-  });
+  const { productSlug } = useParams();
+  const foundProduct = useSelector((state) =>
+    state.products.find((product) => product.slug === productSlug)
+  );
+  const [product, setProduct] = useState(
+    foundProduct ?? {
+      name: "",
+      price: 0,
+      description: "",
+      image: "",
+    }
+  );
 
   const handleChange = (event) => {
     setProduct({ ...product, [event.target.name]: event.target.value });
@@ -22,14 +28,15 @@ const ProductForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(createProduct(product));
+    if (foundProduct) dispatch(updateProduct(product));
+    else dispatch(createProduct(product));
     history.push("/products");
   };
 
   return (
     <>
-      <h1>Product Form</h1>
       <form onSubmit={handleSubmit}>
+        <h1>{foundProduct ? "Update" : "Create"} Product</h1>
         <div className="form-group row">
           <div className="col-6">
             <label>Name</label>
@@ -38,6 +45,7 @@ const ProductForm = () => {
               className="form-control"
               name="name"
               onChange={handleChange}
+              value={product.name}
             />
           </div>
           <div className="col-6">
@@ -48,6 +56,7 @@ const ProductForm = () => {
               className="form-control"
               name="price"
               onChange={handleChange}
+              value={product.price}
             />
           </div>
         </div>
@@ -58,6 +67,7 @@ const ProductForm = () => {
             className="form-control"
             name="description"
             onChange={handleChange}
+            value={product.description}
           />
         </div>
         <div className="form-group">
@@ -67,11 +77,12 @@ const ProductForm = () => {
             className="form-control"
             name="image"
             onChange={handleChange}
+            value={product.image}
           />
         </div>
-        <CreateButtonStyled className="btn float-right" type="submit">
-          Create
-        </CreateButtonStyled>
+        <button type="submit" className="btn btn-info float-right">
+          {foundProduct ? "Update" : "Create"}
+        </button>
       </form>
     </>
   );

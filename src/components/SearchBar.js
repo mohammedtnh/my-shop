@@ -1,4 +1,3 @@
-// Styling
 import { SearchBarStyled } from "../styles";
 
 const SearchBar = (props) => {

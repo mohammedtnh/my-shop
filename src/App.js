@@ -42,7 +42,7 @@ function App() {
         toggleCurrentTheme={toggleCurrentTheme}
       />
       <Switch>
-        <Route path="/products/new">
+        <Route path={["/products/new", "/products/:productSlug/edit"]}>
           <ProductForm />
         </Route>
         <Route path="/products/:productSlug">
