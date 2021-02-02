@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components";
 import { Link, NavLink } from "react-router-dom";
+import { BsPlusCircle } from "react-icons/bs";
 
 export const GlobalStyle = createGlobalStyle`
 body {
@@ -86,6 +87,23 @@ export const DetailWrapper = styled.div`
 
 export const DeleteButtonStyled = styled.p`
   color: ${(props) => props.theme.red};
+`;
+
+export const AddButtonStyled = styled(BsPlusCircle)`
+  height: 2rem;
+  width: 2rem;
+  color: green;
+  float: right;
+`;
+
+export const CreateButtonStyled = styled.button`
+  color: ${(props) => props.theme.backgroundColor};
+  background-color: ${(props) => props.theme.mainColor};
+
+  &:hover {
+    color: ${(props) => props.theme.mainColor};
+    background-color: ${(props) => props.theme.backgroundColor};
+  }
 `;
 
 export const StyledLink = styled(Link)`

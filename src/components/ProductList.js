@@ -2,24 +2,22 @@ import { ListWrapper, Title } from "../styles";
 import ProductItem from "./ProductItem";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import AddButton from "./buttons/AddButton";
 
-const ProductList = (props) => {
+const ProductList = () => {
+  const products = useSelector((state) => state.products);
   const [query, setQuery] = useState("");
 
-  const productList = props.products
+  const productList = products
     .filter((product) => product.name.toLowerCase().includes(query))
-    .map((product) => (
-      <ProductItem
-        key={product.id}
-        product={product}
-        deleteProduct={props.deleteProduct}
-      />
-    ));
+    .map((product) => <ProductItem key={product.id} product={product} />);
 
   return (
     <div>
       <SearchBar setQuery={setQuery} />
       <Title>Products</Title>
+      <AddButton />
       <ListWrapper>{productList}</ListWrapper>
     </div>
   );

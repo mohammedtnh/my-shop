@@ -3,8 +3,8 @@ import { GlobalStyle } from "./styles";
 import Home from "./components/Home";
 import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetails";
+import ProductForm from "./components/ProductForm";
 import { useState } from "react";
-import products from "./products";
 import NavBar from "./components/NavBar";
 import { Route, Switch } from "react-router";
 
@@ -25,14 +25,6 @@ const theme = {
 
 function App() {
   const [currentTheme, setTheme] = useState("light");
-  const [_products, setProducts] = useState(products);
-
-  const deleteProduct = (productId) => {
-    const updatedProducts = _products.filter(
-      (product) => product.id !== productId
-    );
-    setProducts(updatedProducts);
-  };
 
   const toggleCurrentTheme = () => {
     if (currentTheme === "light") {
@@ -50,14 +42,17 @@ function App() {
         toggleCurrentTheme={toggleCurrentTheme}
       />
       <Switch>
-        <Route exact path="/">
-          <Home />
+        <Route path="/products/new">
+          <ProductForm />
         </Route>
         <Route path="/products/:productSlug">
-          <ProductDetail products={products} deleteProduct={deleteProduct} />
+          <ProductDetail />
         </Route>
         <Route path="/products">
-          <ProductList products={_products} deleteProduct={deleteProduct} />
+          <ProductList />
+        </Route>
+        <Route path="/">
+          <Home />
         </Route>
       </Switch>
     </ThemeProvider>
