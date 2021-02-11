@@ -20,22 +20,46 @@ export const fetchProducts = () => {
 };
 
 export const deleteProduct = (productId) => {
-  return {
-    type: DELETE_PRODUCT,
-    payload: { productId },
+  return async (dispatch) => {
+    try {
+      await axios.delete(`http://localhost:8000/products/${productId}`);
+      dispatch({
+        type: DELETE_PRODUCT,
+        payload: { productId: productId },
+      });
+    } catch (error) {
+      console.log(`DELETE Request Error: ${error}`);
+    }
   };
 };
 
 export const createProduct = (newProduct) => {
-  return {
-    type: CREATE_PRODUCT,
-    payload: { newProduct },
+  return async (dispatch) => {
+    try {
+      await axios.post(`http://localhost:8000/products/`, newProduct);
+      dispatch({
+        type: CREATE_PRODUCT,
+        payload: { newProduct },
+      });
+    } catch (error) {
+      console.log(`POST Request Error: ${error}`);
+    }
   };
 };
 
 export const updateProduct = (updatedProduct) => {
-  return {
-    type: UPDATE_PRODUCT,
-    payload: { updatedProduct: updatedProduct },
+  return async (dispatch) => {
+    try {
+      await axios.put(
+        `http://localhost:8000/products/${updatedProduct.id}`,
+        updatedProduct
+      );
+      dispatch({
+        type: UPDATE_PRODUCT,
+        payload: { updatedProduct: updatedProduct },
+      });
+    } catch (error) {
+      console.log(`PUT Request Error: ${error}`);
+    }
   };
 };
