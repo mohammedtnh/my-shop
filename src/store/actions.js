@@ -36,10 +36,13 @@ export const deleteProduct = (productId) => {
 export const createProduct = (newProduct) => {
   return async (dispatch) => {
     try {
-      await axios.post(`http://localhost:8000/products/`, newProduct);
+      const response = await axios.post(
+        `http://localhost:8000/products/`,
+        newProduct
+      );
       dispatch({
         type: CREATE_PRODUCT,
-        payload: { newProduct },
+        payload: { newProduct: response.data },
       });
     } catch (error) {
       console.log(`POST Request Error: ${error}`);
