@@ -36,13 +36,13 @@ export const deleteProduct = (productId) => {
 export const createProduct = (newProduct) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        `http://localhost:8000/products/`,
-        newProduct
-      );
+      const formData = new FormData();
+      for (const key in newProduct) formData.append(key, newProduct[key]);
+
+      const res = await axios.post(`http://localhost:8000/products/`, formData);
       dispatch({
         type: CREATE_PRODUCT,
-        payload: { newProduct: response.data },
+        payload: { newProduct: res.data },
       });
     } catch (error) {
       console.log(`POST Request Error: ${error}`);
@@ -53,13 +53,17 @@ export const createProduct = (newProduct) => {
 export const updateProduct = (updatedProduct) => {
   return async (dispatch) => {
     try {
-      await axios.put(
+      const formData = new FormData();
+      for (const key in updatedProduct)
+        formData.append(key, updatedProduct[key]);
+      const res = await axios.put(
         `http://localhost:8000/products/${updatedProduct.id}`,
-        updatedProduct
+        formData
       );
+
       dispatch({
         type: UPDATE_PRODUCT,
-        payload: { updatedProduct: updatedProduct },
+        payload: { updatedProduct: res.data },
       });
     } catch (error) {
       console.log(`PUT Request Error: ${error}`);

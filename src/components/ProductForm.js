@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { CreateButtonStyled } from "../styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
@@ -24,6 +23,10 @@ const ProductForm = () => {
 
   const handleChange = (event) => {
     setProduct({ ...product, [event.target.name]: event.target.value });
+  };
+
+  const handleImage = (event) => {
+    setProduct({ ...product, image: event.target.files[0] });
   };
 
   const handleSubmit = (event) => {
@@ -73,11 +76,11 @@ const ProductForm = () => {
         <div className="form-group">
           <label>Image</label>
           <input
-            type="text"
+            type="file"
             className="form-control"
             name="image"
-            onChange={handleChange}
-            value={product.image}
+            onChange={handleImage}
+            // value={product.image}
           />
         </div>
         <button type="submit" className="btn btn-info float-right">

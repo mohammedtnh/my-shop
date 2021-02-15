@@ -30,6 +30,7 @@ const reducer = (state = initialState, action) => {
       };
     case "UPDATE_PRODUCT":
       const { updatedProduct } = action.payload;
+      console.log(updatedProduct);
       return {
         ...state,
         products: state.products.map((product) =>
@@ -37,6 +38,7 @@ const reducer = (state = initialState, action) => {
         ),
       };
     default:
+      console.log("default");
       return state;
   }
 };
