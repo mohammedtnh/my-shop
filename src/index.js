@@ -5,17 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
-import reducer from "./store/reducer";
-import { fetchProducts } from "./store/actions";
-import thunk from "redux-thunk";
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
-
-store.dispatch(fetchProducts());
+import store from "./store";
 
 ReactDOM.render(
   <React.StrictMode>

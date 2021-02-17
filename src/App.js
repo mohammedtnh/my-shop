@@ -1,12 +1,8 @@
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./styles";
-import Home from "./components/Home";
-import ProductList from "./components/ProductList";
-import ProductDetail from "./components/ProductDetails";
-import ProductForm from "./components/ProductForm";
 import { useState } from "react";
 import NavBar from "./components/NavBar";
-import { Route, Switch } from "react-router";
+import Routes from "./components/Routes";
 
 const theme = {
   light: {
@@ -41,20 +37,7 @@ function App() {
         currentTheme={currentTheme}
         toggleCurrentTheme={toggleCurrentTheme}
       />
-      <Switch>
-        <Route path={["/products/new", "/products/:productSlug/edit"]}>
-          <ProductForm />
-        </Route>
-        <Route path="/products/:productSlug">
-          <ProductDetail />
-        </Route>
-        <Route path="/products">
-          <ProductList />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
+      <Routes />
     </ThemeProvider>
   );
 }

@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { AddButtonStyled } from "../../styles";
 
-const AddButton = () => {
+const AddButton = (props) => {
+  const shopId = props.shopId;
+  console.log("Add button", shopId);
   return (
-    <Link to="/products/new">
+    <Link to={`/shops/${shopId}/products/new`}>
       <AddButtonStyled />
     </Link>
   );

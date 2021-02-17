@@ -11,6 +11,9 @@ const NavBar = (props) => {
         <NavProduct exact to="/" className="nav-item">
           Home
         </NavProduct>
+        <NavProduct to="/shops" className="nav-item">
+          Shops
+        </NavProduct>
         <NavProduct to="/products" className="nav-item">
           Products
         </NavProduct>

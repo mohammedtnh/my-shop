@@ -47,7 +47,7 @@ export const ListWrapper = styled.div`
   display: flex;
 `;
 
-export const ProductWrapper = styled.div`
+export const ItemWrapper = styled.div`
   margin: 20px;
   img {
     height: 200px;

@@ -7,8 +7,11 @@ import UpdateButton from "./buttons/UpdateButton";
 
 const ProductDetail = () => {
   const productSlug = useParams().productSlug;
+
   const product = useSelector((state) =>
-    state.products.find((product) => product.slug === productSlug)
+    state.productReducer.products.find(
+      (product) => product.slug === productSlug
+    )
   );
 
   if (!product) return <Redirect to="/products" />;
@@ -18,8 +21,6 @@ const ProductDetail = () => {
       <img src={product.image} alt={product.name} className="productPhoto" />
       <p>{product.description}</p>
       <p className="product-price">{product.price} BHD</p>
-
-      {/* <p onClick={() => props.setProduct(null)}>Go Back Home</p> */}
       <DeleteButton productId={product.id} />
       <UpdateButton slug={product.slug} />
     </DetailWrapper>

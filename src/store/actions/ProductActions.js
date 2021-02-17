@@ -1,16 +1,12 @@
-import axios from "axios";
-// ACTION TYPES
-const FETCH_PRODUCTS = "FETCH_PRODUCTS";
-const DELETE_PRODUCT = "DELETE_PRODUCT";
-const CREATE_PRODUCT = "CREATE_PRODUCT";
-const UPDATE_PRODUCT = "UPDATE_PRODUCT";
+import * as types from "./actionTypes";
+import instance from "./instance";
 
 export const fetchProducts = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get("http://localhost:8000/products/");
+      const response = await instance.get("/products");
       dispatch({
-        type: FETCH_PRODUCTS,
+        type: types.FETCH_PRODUCTS,
         payload: { products: response.data },
       });
     } catch (error) {
@@ -22,9 +18,9 @@ export const fetchProducts = () => {
 export const deleteProduct = (productId) => {
   return async (dispatch) => {
     try {
-      await axios.delete(`http://localhost:8000/products/${productId}`);
+      await instance.delete(`products/${productId}`);
       dispatch({
-        type: DELETE_PRODUCT,
+        type: types.DELETE_PRODUCT,
         payload: { productId: productId },
       });
     } catch (error) {
@@ -39,9 +35,12 @@ export const createProduct = (newProduct) => {
       const formData = new FormData();
       for (const key in newProduct) formData.append(key, newProduct[key]);
 
-      const res = await axios.post(`http://localhost:8000/products/`, formData);
+      const res = await instance.post(
+        `/shops/${newProduct.shopId}/products`,
+        formData
+      );
       dispatch({
-        type: CREATE_PRODUCT,
+        type: types.CREATE_PRODUCT,
         payload: { newProduct: res.data },
       });
     } catch (error) {
@@ -56,13 +55,13 @@ export const updateProduct = (updatedProduct) => {
       const formData = new FormData();
       for (const key in updatedProduct)
         formData.append(key, updatedProduct[key]);
-      const res = await axios.put(
-        `http://localhost:8000/products/${updatedProduct.id}`,
+      const res = await instance.put(
+        `/products/${updatedProduct.id}`,
         formData
       );
 
       dispatch({
-        type: UPDATE_PRODUCT,
+        type: types.UPDATE_PRODUCT,
         payload: { updatedProduct: res.data },
       });
     } catch (error) {

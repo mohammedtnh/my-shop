@@ -1,6 +1,6 @@
 import { DeleteButtonStyled } from "../../styles";
 import { useDispatch } from "react-redux";
-import { deleteProduct } from "../../store/actions";
+import { deleteProduct } from "../../store/actions/ProductActions";
 
 const DeleteButton = ({ productId }) => {
   const dispatch = useDispatch();

@@ -3,17 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
 // Redux Actions
-import { createProduct, updateProduct } from "../store/actions";
+import { createProduct, updateProduct } from "../store/actions/ProductActions";
 
 const ProductForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { productSlug } = useParams();
+  const { productSlug, shopId } = useParams();
   const foundProduct = useSelector((state) =>
-    state.products.find((product) => product.slug === productSlug)
+    state.productReducer.products.find(
+      (product) => product.slug === productSlug
+    )
   );
+  console.log(shopId);
   const [product, setProduct] = useState(
     foundProduct ?? {
+      shopId: shopId,
       name: "",
       price: 0,
       description: "",
@@ -80,7 +84,6 @@ const ProductForm = () => {
             className="form-control"
             name="image"
             onChange={handleImage}
-            // value={product.image}
           />
         </div>
         <button type="submit" className="btn btn-info float-right">

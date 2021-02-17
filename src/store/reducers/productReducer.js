@@ -1,4 +1,5 @@
 import slugify from "react-slugify";
+import * as types from "../actions/actionTypes";
 
 const initialState = {
   products: [],
@@ -7,13 +8,13 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "FETCH_PRODUCTS":
+    case types.FETCH_PRODUCTS:
       return {
         ...state,
         products: action.payload.products,
         loading: false,
       };
-    case "CREATE_PRODUCT":
+    case types.CREATE_PRODUCT:
       const { newProduct } = action.payload;
       newProduct.id = state.products[state.products.length - 1].id + 1;
       newProduct.slug = slugify(newProduct.name, { lower: true });
@@ -21,16 +22,15 @@ const reducer = (state = initialState, action) => {
         ...state,
         products: [...state.products, newProduct],
       };
-    case "DELETE_PRODUCT":
+    case types.DELETE_PRODUCT:
       return {
         ...state,
         products: state.products.filter(
           (product) => product.id !== action.payload.productId
         ),
       };
-    case "UPDATE_PRODUCT":
+    case types.UPDATE_PRODUCT:
       const { updatedProduct } = action.payload;
-      console.log(updatedProduct);
       return {
         ...state,
         products: state.products.map((product) =>
@@ -38,7 +38,6 @@ const reducer = (state = initialState, action) => {
         ),
       };
     default:
-      console.log("default");
       return state;
   }
 };
