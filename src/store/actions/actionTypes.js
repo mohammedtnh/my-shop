@@ -7,3 +7,6 @@ export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 // Shop Types
 export const FETCH_SHOPS = "FETCH_SHOPS";
 export const CREATE_SHOP = "CREATE_SHOP";
+
+// Auth Types
+export const SET_USER = "SET_USER";
