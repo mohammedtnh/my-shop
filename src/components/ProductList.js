@@ -4,11 +4,14 @@ import SearchBar from "./SearchBar";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import Loading from "./Loading";
+import { Redirect } from "react-router";
 
 const ProductList = ({ products }) => {
   // const products = useSelector((state) => state.productReducer.products);
   const [query, setQuery] = useState("");
   const loading = useSelector((state) => state.loading);
+  const user = useSelector((state) => state.authReducer.user);
+  if (!user) return <Redirect to="/signin" />;
 
   if (loading) return <Loading />;
 

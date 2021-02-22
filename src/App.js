@@ -3,7 +3,7 @@ import { GlobalStyle } from "./styles";
 import { useState } from "react";
 import NavBar from "./components/NavBar";
 import Routes from "./components/Routes";
-
+import Cookies from "js-cookie";
 const theme = {
   light: {
     mainColor: "#B9B9B9",
@@ -20,13 +20,15 @@ const theme = {
 };
 
 function App() {
-  const [currentTheme, setTheme] = useState("light");
+  const [currentTheme, setTheme] = useState(Cookies.get("theme") ?? "light");
 
   const toggleCurrentTheme = () => {
     if (currentTheme === "light") {
       setTheme("dark");
+      Cookies.set("theme", "dark");
     } else {
       setTheme("light");
+      Cookies.set("theme", "light");
     }
   };
 

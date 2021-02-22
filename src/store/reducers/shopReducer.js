@@ -24,7 +24,6 @@ const reducer = (state = initialState, action) => {
         shops: [...state.shops, newShop],
       };
     default:
-      console.log("default");
       return state;
   }
 };
